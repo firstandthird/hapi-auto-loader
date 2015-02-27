@@ -1,0 +1,38 @@
+{
+  "name": "hapi-auto-loader",
+  "version": "0.0.0",
+  "description": "A multi-purpose auto loader for hapi",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "handlebars": "^3.0.0",
+    "handlebars-layouts": "^1.1.0",
+    "hapi": "^8.2.0",
+    "hoek": "^2.11.0",
+    "lodash": "^3.3.1",
+    "require-all": "^1.0.0"
+  },
+  "devDependencies": {
+    "hapi": "^8.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/firstandthird/hapi-auto-loader.git"
+  },
+  "keywords": [
+    "auto",
+    "load",
+    "hapi"
+  ],
+  "author": "First+Third",
+  "bugs": {
+    "url": "https://github.com/firstandthird/hapi-auto-loader/issues"
+  },
+  "homepage": "https://github.com/firstandthird/hapi-auto-loader"
+}
