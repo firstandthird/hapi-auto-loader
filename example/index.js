@@ -15,6 +15,18 @@ server.register({
     return;
   }
 
+  var viewConfig = {
+    engines: {
+      html: server.app.handlebars
+    },
+    relativeTo: path.join(process.cwd(), 'example', 'views'),
+    path: 'pages',
+    isCached: true,
+    partialsPath: 'modules'
+  };
+
+  server.views(viewConfig);
+
   server.start(function() {
     console.log('Server running at:', server.info.uri);
   });

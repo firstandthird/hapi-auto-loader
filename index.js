@@ -3,32 +3,25 @@ var async = require('async');
 
 var methodLoader = require('./lib/methodLoader');
 var routeLoader = require('./lib/routeLoader');
-var viewLoader = require('./lib/viewLoader');
 var helperLoader = require('./lib/helperLoader');
+var layoutLoader = require('./lib/layoutLoader');
 
 var Handlebars = require('handlebars');
 require('handlebars-layouts')(Handlebars);
 
 var defaults = {
   cwd: process.cwd(),
-  handlebars: Handlebars,
   methods: {
     path: 'methods'
   },
   routes: {
     path: 'routes'
   },
-  views: {
-    path: 'views',
-    cached: true,
-    pages: 'pages',
-    partials: 'modules',
-    layouts: [
-      'layout'
-    ]
-  },
   helpers: {
     path: 'helpers'
+  },
+  layouts: {
+    path: 'views/layouts'
   }
 };
 
@@ -37,17 +30,22 @@ exports.register = function(server, options, next) {
   var settings = Hoek.clone(options);
   settings = Hoek.applyToDefaults(defaults, settings);
 
+  if (!settings.handlebars) {
+    settings.handlebars = Handlebars;
+  }
+
   this.server = server;
   this.settings = settings;
 
   server.expose('settings', this.settings);
   server.expose('handlebars', this.settings.Handlebars);
+  server.app.handlebars = settings.handlebars;
 
   async.parallel([
     methodLoader.bind(this),
     routeLoader.bind(this),
-    viewLoader.bind(this),
-    helperLoader.bind(this)
+    helperLoader.bind(this),
+    layoutLoader.bind(this)
   ], function(err) {
     if (err) {
       return next(err)
