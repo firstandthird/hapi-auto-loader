@@ -7,10 +7,7 @@ server.connection({ port: 3000 });
 server.register({
   register: require('../'),
   options: {
-    cwd: path.join(process.cwd(), 'example'),
-    layouts: {
-      path: 'views/layouts'
-    }
+    cwd: path.join(process.cwd(), 'example')
   }
 }, function (err) {
   if (err) {
@@ -24,13 +21,22 @@ server.register({
     },
     relativeTo: path.join(process.cwd(), 'example', 'views'),
     path: 'pages',
-    isCached: true,
-    partialsPath: 'modules'
+    isCached: true
   };
 
   server.views(viewConfig);
 
-  server.start(function() {
-    console.log('Server running at:', server.info.uri);
+  require('../')(server, {
+    cwd: path.join(process.cwd(), 'example'),
+    partials: {
+      path: 'views/modules'
+    },
+    routes: false
+  }, function(err) {
+    console.log('auto-loaded again');
+
+    server.start(function() {
+      console.log('Server running at:', server.info.uri);
+    });
   });
 });
