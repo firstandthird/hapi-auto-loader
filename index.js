@@ -21,7 +21,7 @@ var defaults = {
     path: 'helpers'
   },
   layouts: {
-    path: 'views/layouts'
+    path: 'layouts'
   }
 };
 

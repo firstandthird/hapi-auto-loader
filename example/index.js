@@ -7,7 +7,10 @@ server.connection({ port: 3000 });
 server.register({
   register: require('../'),
   options: {
-    cwd: path.join(process.cwd(), 'example')
+    cwd: path.join(process.cwd(), 'example'),
+    layouts: {
+      path: 'views/layouts'
+    }
   }
 }, function (err) {
   if (err) {
