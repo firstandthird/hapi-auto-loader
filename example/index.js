@@ -7,7 +7,13 @@ server.connection({ port: 3000 });
 server.register({
   register: require('../'),
   options: {
-    cwd: path.join(process.cwd(), 'example')
+    cwd: path.join(process.cwd(), 'example'),
+    routes: {
+      context: {
+        catPic: 'http://placekitten.com/g/200/300'
+      },
+      base: '/cats/'
+    },
   }
 }, function (err) {
   if (err) {

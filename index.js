@@ -15,7 +15,9 @@ var defaults = {
     path: 'methods'
   },
   routes: {
-    path: 'routes'
+    path: 'routes',
+    base: '/',
+    context: {}
   },
   helpers: {
     path: 'helpers'
