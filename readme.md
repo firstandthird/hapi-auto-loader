@@ -35,7 +35,10 @@ Configuring routes:
 ```js
 require('hapi-auto-loader')(server, {
   routes: {
-    base: '/cats/'
+    base: '/cats/',
+    context: {
+      kitten: 'Mew'
+    },
   }
 }, next);
 ``````js

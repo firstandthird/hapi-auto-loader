@@ -9,7 +9,10 @@ server.register({
   options: {
     cwd: path.join(process.cwd(), 'example'),
     routes: {
-      base: '/cats/'
+      base: '/cats/',
+      context: {
+        catPic: 'http://placekitten.com/g/200/300'
+      }
     },
   }
 }, function (err) {
