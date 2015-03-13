@@ -9,9 +9,6 @@ server.register({
   options: {
     cwd: path.join(process.cwd(), 'example'),
     routes: {
-      context: {
-        catPic: 'http://placekitten.com/g/200/300'
-      },
       base: '/cats/'
     },
   }
