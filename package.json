@@ -1,6 +1,6 @@
 {
   "name": "hapi-auto-loader",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A multi-purpose auto loader for hapi",
   "main": "index.js",
   "directories": {
