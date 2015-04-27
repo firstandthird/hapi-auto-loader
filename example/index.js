@@ -42,6 +42,9 @@ server.register({
     console.log('auto-loaded again');
 
     server.start(function() {
+      server.methods.folder.doSomething(function(err, result) {
+        console.log('method result', result);
+      });
       console.log('Server running at:', server.info.uri);
     });
   });
