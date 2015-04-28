@@ -1,4 +1,10 @@
 
+0.3.0 / 2015-04-28
+==================
+
+  * allow dash case in folder names, allow plain functions
+
+
 0.2.0 / 2015-04-26
 ==================
 
