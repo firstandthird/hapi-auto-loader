@@ -27,43 +27,45 @@ var defaults = {
   }
 };
 
-var loader = function(server, options, next) {
-  
-  var settings = Hoek.clone(options);
-  settings = Hoek.applyToDefaults(defaults, settings);
+exports.register = function(server, foo, next) {
 
-  if (!settings.handlebars) {
-    settings.handlebars = server.app.handlebars || Handlebars;
-  }
+  server.expose('load', function(options, done) {
 
-  this.server = server;
-  this.settings = settings;
+    var settings = Hoek.clone(options);
+    settings = Hoek.applyToDefaults(defaults, settings);
 
-  if (!server.app.autoLoaderInit) {
-    server.expose('settings', this.settings);
-    server.expose('handlebars', this.settings.Handlebars);
-    server.app.handlebars = settings.handlebars;
-    server.app.autoLoaderInit = true;
-  }
-
-  async.parallel([
-    methodLoader.bind(this),
-    routeLoader.bind(this),
-    helperLoader.bind(this),
-    partialLoader.bind(this)
-  ], function(err) {
-    if (err) {
-      return next(err)
+    if (!settings.handlebars) {
+      settings.handlebars = server.app.handlebars || Handlebars;
     }
 
-    next();
+    var self = {
+      server: server,
+      settings: settings
+    };
+
+    server.expose('settings', self.settings);
+    server.expose('handlebars', self.settings.Handlebars);
+    server.app.handlebars = settings.handlebars;
+
+    async.parallel([
+      methodLoader.bind(self),
+      routeLoader.bind(self),
+      helperLoader.bind(self),
+      partialLoader.bind(self)
+    ], function(err) {
+      if (err) {
+        return done(err);
+      }
+
+      done();
+    });
+
   });
+
+  next();
+
 };
 
-loader.register = loader;
-
-loader.register.attributes = {
+exports.register.attributes = {
   pkg: require('./package.json')
 };
-
-module.exports = loader;
