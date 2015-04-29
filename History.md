@@ -1,4 +1,10 @@
 
+0.4.0 / 2015-04-28
+==================
+
+  * refactored to load the plugin once and then call load(options, done); to use
+
+
 0.3.0 / 2015-04-28
 ==================
 
