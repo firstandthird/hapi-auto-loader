@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
 var path = require('path');
+var Handlebars = require('handlebars');
 
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
@@ -7,13 +8,6 @@ server.connection({ port: 3000 });
 server.register({
   register: require('../'),
   options: {
-    cwd: path.join(process.cwd(), 'example'),
-    routes: {
-      base: '/cats/',
-      context: {
-        catPic: 'http://placekitten.com/g/200/300'
-      }
-    },
   }
 }, function (err) {
   if (err) {
@@ -23,7 +17,7 @@ server.register({
 
   var viewConfig = {
     engines: {
-      html: server.app.handlebars
+      html: Handlebars
     },
     relativeTo: path.join(process.cwd(), 'example', 'views'),
     path: 'pages',
@@ -32,15 +26,22 @@ server.register({
 
   server.views(viewConfig);
 
-  require('../')(server, {
+  //require('../')(server, {
+    //cwd: path.join(process.cwd(), 'example'),
+    //partials: {
+      //path: 'views/modules'
+    //},
+    //routes: false
+  //}, function(err) {
+  server.plugins['hapi-auto-loader'].load({
     cwd: path.join(process.cwd(), 'example'),
-    partials: {
-      path: 'views/modules'
+    routes: {
+      base: '/cats/',
+      context: {
+        catPic: 'http://placekitten.com/g/200/300'
+      }
     },
-    routes: false
-  }, function(err) {
-    console.log('auto-loaded again');
-
+  }, function() {
     server.start(function() {
       server.methods.folder.doSomething(function(err, result) {
         console.log('method result', result);
@@ -48,4 +49,5 @@ server.register({
       console.log('Server running at:', server.info.uri);
     });
   });
+
 });
