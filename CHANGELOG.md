@@ -1,4 +1,12 @@
 
+0.5.0 / 2015-05-12
+==================
+
+  * updated example
+  * run method loader first.  fixes race conditions with routes that use pre
+  * Filters routes to only include js files
+
+
 0.4.0 / 2015-04-28
 ==================
 
