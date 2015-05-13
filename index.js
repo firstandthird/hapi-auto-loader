@@ -47,17 +47,21 @@ exports.register = function(server, foo, next) {
     server.expose('handlebars', self.settings.Handlebars);
     server.app.handlebars = settings.handlebars;
 
-    async.parallel([
-      methodLoader.bind(self),
-      routeLoader.bind(self),
-      helperLoader.bind(self),
-      partialLoader.bind(self)
-    ], function(err) {
+    methodLoader.call(self, function(err) {
       if (err) {
         return done(err);
       }
+      async.parallel([
+        routeLoader.bind(self),
+        helperLoader.bind(self),
+        partialLoader.bind(self)
+      ], function(err) {
+        if (err) {
+          return done(err);
+        }
 
-      done();
+        done();
+      });
     });
 
   });
