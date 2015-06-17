@@ -41,4 +41,6 @@ require('hapi-auto-loader')(server, {
     },
   }
 }, next);
-``````js
+```
+
+Routes in sub-directories can use the directory structure as the url path simply by not including a slash in the beginning of the path. See: `example/routes/api`
