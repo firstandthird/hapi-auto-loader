@@ -1,4 +1,12 @@
 
+0.6.0 / 2015-06-22
+==================
+
+  * Added new example files.
+  * Added support for directory based route paths.
+  * Added ds store to ignore.
+
+
 0.5.0 / 2015-05-12
 ==================
 
