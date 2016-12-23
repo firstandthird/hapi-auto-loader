@@ -7,16 +7,16 @@
     "example": "example"
   },
   "dependencies": {
-    "async": "^0.9.0",
-    "glob": "^5.0.2",
-    "handlebars": "^3.0.0",
-    "handlebars-layouts": "^1.1.0",
-    "hoek": "^2.11.0",
-    "lodash": "^3.9.3",
-    "require-all": "^1.1.0"
+    "async": "^2.1.4",
+    "glob": "^7.1.1",
+    "handlebars": "^4.0.6",
+    "handlebars-layouts": "^3.1.4",
+    "hoek": "^4.1.0",
+    "lodash": "^4.17.2",
+    "require-all": "^2.1.0"
   },
   "devDependencies": {
-    "hapi": "^8.2.0"
+    "hapi": "^16.0.2"
   },
   "repository": {
     "type": "git",
